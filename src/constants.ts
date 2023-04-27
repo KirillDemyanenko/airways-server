@@ -13,7 +13,7 @@ export const air = {
     icao: 'YNHL',
     iata: '',
     name: 'Nhill Airport',
-    city: '',
+    city: 'City',
     state: 'Victoria',
     country: 'AU',
     elevation: 454,

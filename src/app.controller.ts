@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Flying } from './entitys/flying.entity';
+import { User } from './entitys/user.entity';
 
 export class CreateUser {
   username: string;
@@ -12,8 +13,13 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getAll(): any {
-    return this.appService.getAllUsers();
+  @Render('index.html')
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  getDocumentation() {}
+
+  @Get('users')
+  async getAllUsers(): Promise<User[]> {
+    return await this.appService.getAllUsers();
   }
 
   @Post('validate')
