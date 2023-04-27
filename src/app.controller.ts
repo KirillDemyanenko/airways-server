@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Flying } from './entitys/flying.entity';
 
 export class CreateUser {
   username: string;
@@ -35,5 +36,15 @@ export class AppController {
   @Post('login')
   async postLogin(@Body() user: CreateUser) {
     return await this.appService.login(user);
+  }
+
+  @Get('air')
+  getAir(): void {
+    this.appService.fillAirports();
+  }
+
+  @Get('flying')
+  async getFlying(): Promise<Flying[]> {
+    return await this.appService.generateFlying(500);
   }
 }
