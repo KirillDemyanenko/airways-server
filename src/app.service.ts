@@ -6,6 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Flying } from './entitys/flying.entity';
 import { air, TypeOfFlight } from './constants';
 import { Airports } from './entitys/airports.entity';
+import { LessThan, MoreThan } from 'typeorm';
 
 @Injectable()
 export class AppService {
@@ -100,6 +101,33 @@ export class AppService {
     }
   }
 
+  /* return flights */
+  async getFlight(
+    number: number,
+    next: number,
+    startDate: Date,
+    endDate: Date,
+    direction: string,
+  ) {
+    console.log(
+      direction === 'one-way'
+        ? TypeOfFlight['oneWay']
+        : TypeOfFlight['roundTrip'],
+    );
+    return await Flying.find({
+      where: {
+        departureDate: MoreThan(startDate),
+        returnDate: LessThan(endDate),
+        type:
+          direction === 'true'
+            ? TypeOfFlight['oneWay']
+            : TypeOfFlight['roundTrip'],
+      },
+      take: number,
+      skip: next,
+    });
+  }
+
   /* Generates fake flights */
   async generateFlying(number: number): Promise<Flying[]> {
     //TODO remove or create guard on production
@@ -119,6 +147,7 @@ export class AppService {
         });
         flying.destinationFrom = from.ICAO;
         flying.destinationTo = to.ICAO;
+        flying.freePlace = Math.floor(Math.random() * 200);
       } catch (err) {
         console.log(err);
       }

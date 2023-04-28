@@ -23,4 +23,7 @@ export class Flying extends BaseEntity {
 
   @Column()
   costUSD: number;
+
+  @Column({ nullable: true })
+  freePlace: number;
 }

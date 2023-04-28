@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Render } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Render,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { Flying } from './entitys/flying.entity';
 import { User } from './entitys/user.entity';
@@ -45,12 +53,32 @@ export class AppController {
   }
 
   @Get('air')
-  getAir(): void {
-    this.appService.fillAirports();
+  async getAir(): Promise<void> {
+    await this.appService.fillAirports();
   }
 
   @Get('flying')
-  async getFlying(): Promise<Flying[]> {
-    return await this.appService.generateFlying(500);
+  async getFlying(
+    @Query()
+    query: {
+      number: number;
+      skip: number;
+      startDate: Date;
+      endDate: Date;
+      oneWay: string;
+    },
+  ) {
+    return await this.appService.getFlight(
+      +query.number || 0,
+      +query.skip || 0,
+      query.startDate,
+      query.endDate,
+      query.oneWay,
+    );
+  }
+
+  @Get('gen-fly/:num')
+  async generateFlying(@Param('num') num: number): Promise<Flying[]> {
+    return await this.appService.generateFlying(num);
   }
 }

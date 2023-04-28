@@ -21,7 +21,7 @@ import { join } from 'path';
       signOptions: { expiresIn: 60 * 60 }, // key duration
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
+      rootPath: join(__dirname, '..', 'views'),
     }),
   ],
   controllers: [AppController],
