@@ -12,7 +12,12 @@ import { Flying } from './entitys/flying.entity';
 import { User } from './entitys/user.entity';
 
 export class CreateUser {
-  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  birthDate: Date;
+  gender: string;
+  phone?: string;
   password: string;
 }
 
@@ -31,10 +36,10 @@ export class AppController {
   }
 
   @Post('validate')
-  async postValidate(@Body() login: { login: string }) {
-    return (await this.appService.validateLogin(login.login))
-      ? { status: true, message: `login: «${login.login}» is available` }
-      : { status: false, message: `login: «${login.login}» already exist` };
+  async postValidate(@Body() email: { email: string }) {
+    return (await this.appService.validateLogin(email.email))
+      ? { status: true, message: `email: «${email.email}» is available` }
+      : { status: false, message: `email: «${email.email}» already exist` };
   }
 
   @Post('registration')
@@ -42,7 +47,7 @@ export class AppController {
     return (await this.appService.registration(user))
       ? {
           status: true,
-          message: `successfully registered new user «${user.username}»`,
+          message: `successfully registered new user «${user.firstName} ${user.lastName}»`,
         }
       : { status: false, message: `registration failed` };
   }

@@ -16,9 +16,14 @@ export class AppService {
    if not, enters the user into the database */
   async registration(userDetails: CreateUser): Promise<boolean> {
     const user = new User();
-    user.username = userDetails.username;
+    user.email = userDetails.email;
+    user.firstName = userDetails.firstName;
+    user.lastName = userDetails.lastName;
+    user.gender = userDetails.gender;
+    user.birthDate = userDetails.birthDate;
+    userDetails.phone = userDetails.phone || '';
     user.password = await bcrypt.hash(userDetails.password, 10);
-    if (await this.validateLogin(user.username)) {
+    if (await this.validateLogin(user.email)) {
       try {
         await user.save();
         return true;
@@ -34,7 +39,7 @@ export class AppService {
   async validateUser(userDetails: CreateUser): Promise<boolean> {
     try {
       const foundUser = await User.findOneBy({
-        username: userDetails.username,
+        email: userDetails.email,
       });
       if (foundUser) {
         return !!(await bcrypt.compare(
@@ -53,7 +58,10 @@ export class AppService {
       try {
         return {
           access_token: await this.jwtService.signAsync({
-            username: userDetails.username,
+            email: userDetails.email,
+            gender: userDetails.gender,
+            firstName: userDetails.firstName,
+            lastName: userDetails.lastName,
           }),
         };
       } catch (err) {
@@ -65,9 +73,9 @@ export class AppService {
   }
 
   /* Checks if the username exists in the database */
-  async validateLogin(userName: string): Promise<boolean> {
+  async validateLogin(email: string): Promise<boolean> {
     try {
-      return (await User.findBy({ username: userName })).length === 0;
+      return (await User.findBy({ email: email })).length === 0;
     } catch (err) {
       console.log(err);
     }
