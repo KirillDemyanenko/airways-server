@@ -5,7 +5,9 @@ import * as ejs from 'ejs';
 
 async function bootstrap() {
   const port = process.env.PORT || 9002;
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true,
+  });
   app.engine('html', ejs.renderFile);
   app.set('view engine', 'ejs');
   await app
