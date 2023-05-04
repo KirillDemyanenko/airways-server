@@ -13,12 +13,12 @@ import { User } from './entitys/user.entity';
 import { Airports } from './entitys/airports.entity';
 
 export class CreateUser {
-  email: string;
   firstName: string;
+  email: string;
   lastName: string;
   birthDate: Date;
   gender: string;
-  phone?: string;
+  phone: string | null;
   password: string;
 }
 
