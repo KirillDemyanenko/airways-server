@@ -1,3 +1,77 @@
+GET http://localhost:9002/airports?title=moscow&number=1&skip=2
+Accept: application/json
+
+<> 2023-05-04T094413.200.json
+
+###
+
+GET http://localhost:9002/airports?title=moscow&number=1
+Accept: application/json
+
+<> 2023-05-04T094349.200.json
+
+###
+
+GET http://localhost:9002/airports?title=moscow
+Accept: application/json
+
+<> 2023-05-04T094225.200.json
+
+###
+
+GET http://localhost:9002/airports?title=mosc
+Accept: application/json
+
+<> 2023-05-04T094211.200.json
+
+###
+
+GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=false
+Accept: application/json
+
+<> 2023-05-04T091708.200.json
+
+###
+
+GET http://localhost:9002/users
+Accept: application/json
+
+<> 2023-05-04T091200.200.json
+
+###
+
+GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=false
+Accept: application/json
+
+<> 2023-05-04T091147.200.json
+
+###
+
+GET http://localhost:9002/users
+Accept: application/json
+
+<> 2023-05-04T091109.200.json
+
+###
+
+POST http://localhost:9002/validate
+Content-Type: application/json
+
+{
+  "email": "mail@mail.ru"
+}
+
+<> 2023-05-04T090950.201.json
+
+###
+
+GET http://localhost:9002/users
+Accept: application/json
+
+<> 2023-05-04T090940.200.json
+
+###
+
 POST http://localhost:9002/validate
 Content-Type: application/json
 
@@ -356,76 +430,6 @@ GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.
 Accept: application/json
 
 <> 2023-04-28T154132.200.json
-
-###
-
-GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=false
-Accept: application/json
-
-<> 2023-04-28T154122.200.json
-
-###
-
-GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=true
-Accept: application/json
-
-<> 2023-04-28T154114.200.json
-
-###
-
-GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=true
-Accept: application/json
-
-<> 2023-04-28T153957.200.json
-
-###
-
-GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=false
-Accept: application/json
-
-<> 2023-04-28T153941.200.json
-
-###
-
-GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=false
-Accept: application/json
-
-<> 2023-04-28T153911.200.json
-
-###
-
-GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=true
-Accept: application/json
-
-<> 2023-04-28T153901.200.json
-
-###
-
-GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=true
-Accept: application/json
-
-<> 2023-04-28T153842.200.json
-
-###
-
-GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=true
-Accept: application/json
-
-<> 2023-04-28T153818.200.json
-
-###
-
-GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=false
-Accept: application/json
-
-<> 2023-04-28T153758.200.json
-
-###
-
-GET http://localhost:9002/flying?number=1&skip=10&startDate=2023-04-28T12:20:34.365Z&endDate=2023-05-14T12:20:34.365Z&oneWay=false
-Accept: application/json
-
-<> 2023-04-28T153617.200.json
 
 ###
 

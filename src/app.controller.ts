@@ -10,6 +10,7 @@ import {
 import { AppService } from './app.service';
 import { Flying } from './entitys/flying.entity';
 import { User } from './entitys/user.entity';
+import { Airports } from './entitys/airports.entity';
 
 export class CreateUser {
   email: string;
@@ -60,6 +61,22 @@ export class AppController {
   @Get('air')
   async getAir(): Promise<void> {
     await this.appService.fillAirports();
+  }
+
+  @Get('airports')
+  async getAirports(
+    @Query()
+    query: {
+      title: string;
+      number: number;
+      skip: number;
+    },
+  ): Promise<Airports[]> {
+    return await this.appService.getAirports(
+      query.title,
+      query.number,
+      query.skip,
+    );
   }
 
   @Get('flying')

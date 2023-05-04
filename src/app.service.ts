@@ -6,7 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Flying } from './entitys/flying.entity';
 import { air, TypeOfFlight } from './constants';
 import { Airports } from './entitys/airports.entity';
-import { LessThan, MoreThan } from 'typeorm';
+import { LessThan, Like, MoreThan } from 'typeorm';
 
 @Injectable()
 export class AppService {
@@ -117,11 +117,6 @@ export class AppService {
     endDate: Date,
     direction: string,
   ) {
-    console.log(
-      direction === 'one-way'
-        ? TypeOfFlight['oneWay']
-        : TypeOfFlight['roundTrip'],
-    );
     return await Flying.find({
       where: {
         departureDate: MoreThan(startDate),
@@ -185,5 +180,20 @@ export class AppService {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  /* Returns a list of airports that match the given parameters */
+  async getAirports(title: string, number = 10, next = 0): Promise<Airports[]> {
+    return await Airports.find({
+      where: [
+        { ICAO: Like(`%${title}%`) },
+        { city: Like(`%${title}%`) },
+        { name: Like(`%${title}%`) },
+        { state: Like(`%${title}%`) },
+        { country: Like(`%${title}%`) },
+      ],
+      take: number,
+      skip: next,
+    });
   }
 }

@@ -7,6 +7,7 @@ async function bootstrap() {
   const port = process.env.PORT || 9002;
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: true,
+    logger: ['error', 'warn', 'log', 'verbose'],
   });
   app.engine('html', ejs.renderFile);
   app.set('view engine', 'ejs');
