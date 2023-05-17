@@ -20,6 +20,7 @@ export class CreateUser {
   gender: string;
   phone: string | null;
   password: string;
+  country: string;
 }
 
 @Controller()

@@ -23,6 +23,7 @@ export class AppService {
     user.birthDate = userDetails.birthDate;
     userDetails.phone = userDetails.phone || '';
     user.password = await bcrypt.hash(userDetails.password, 10);
+    user.country = userDetails.country;
     if (await this.validateLogin(user.email)) {
       try {
         await user.save();
@@ -62,6 +63,7 @@ export class AppService {
             gender: userDetails.gender,
             firstName: userDetails.firstName,
             lastName: userDetails.lastName,
+            country: userDetails.country,
           }),
         };
       } catch (err) {
