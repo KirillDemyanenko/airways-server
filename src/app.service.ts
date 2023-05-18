@@ -57,14 +57,13 @@ export class AppService {
   async login(userDetails: CreateUser) {
     if (await this.validateUser(userDetails)) {
       try {
-        const userInfo = await User.findOneBy({ email: userDetails.email });
+        const res = (userInfo: User) => {
+          const { password, ...rest } = userInfo;
+          return rest;
+        };
         return {
           access_token: await this.jwtService.signAsync({
-            email: userInfo.email,
-            gender: userInfo.gender,
-            firstName: userInfo.firstName,
-            lastName: userInfo.lastName,
-            country: userInfo.country,
+            user: res(await User.findOneBy({ email: userDetails.email })),
           }),
         };
       } catch (err) {
